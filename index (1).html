@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RAUSHAN — A World of Little Wonders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500&family=Manrope:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#f8f1e7;--blush:#f3d6d2;--rose:#d4a0a3;--gold:#c9a96a;--ink:#4a0f1f;--soft:#85505c;--glass:rgba(255,250,243,.55);--line:rgba(201,169,106,.55);color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ivory:#241019;--blush:#3a1623;--ink:#f6e8e0;--soft:#d9aeb3;--glass:rgba(255,255,255,.07);color-scheme:dark}}
+:root[data-theme="dark"]{--ivory:#241019;--blush:#3a1623;--ink:#f6e8e0;--soft:#d9aeb3;--glass:rgba(255,255,255,.07);color-scheme:dark}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font:300 1rem/1.7 "Manrope",system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--ivory),var(--blush) 55%,var(--ivory));background-attachment:fixed;overflow-x:hidden}
+body.lock{overflow:hidden}
+.serif,h1,h2{font-family:"Cormorant Garamond",Georgia,serif}
+h2{font-style:italic;font-weight:500;font-size:clamp(2rem,7vw,3.6rem);line-height:1.1;margin-bottom:38px;text-align:center;max-width:14em}
+section{position:relative;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:90px 22px;overflow:hidden}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-events:none}
+.dk{background:linear-gradient(180deg,transparent,#2b0a15 14%,#16060d 86%,transparent);color:#f7ece4}
+.dk h2{color:#f7ece4}
+.rv{opacity:0;transform:translateY(40px);filter:blur(6px);transition:opacity 1.2s,transform 1.2s cubic-bezier(.2,.7,.2,1),filter 1.2s}.rv.in{opacity:1;transform:none;filter:none}
+.glass{background:var(--glass);border:1px solid var(--line);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 30px 60px -30px rgba(74,15,31,.35),inset 0 1px 0 rgba(255,255,255,.4);border-radius:26px}
+.btn{font:500 .8rem "Manrope",sans-serif;letter-spacing:.24em;color:#2b0a15;border:0;border-radius:99px;padding:18px 34px;cursor:pointer;background:linear-gradient(120deg,#e6cf9d,#c9a96a 55%,#e9d6a8);box-shadow:0 14px 34px -12px rgba(201,169,106,.7);transition:transform .3s}
+.btn:hover{transform:translateY(-3px)}.btn:active{transform:scale(.97)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+/* intro */
+#intro{position:fixed;inset:0;z-index:50;background:radial-gradient(circle at 50% 45%,#2a0b16,#0b0206 70%);color:#f3e6cf;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;clip-path:circle(150% at var(--x,50%) var(--y,80%));transition:clip-path 1.8s cubic-bezier(.75,0,.2,1)}
+#intro.go{clip-path:circle(0% at var(--x,50%) var(--y,80%));pointer-events:none}
+.dot{position:absolute;top:44%;left:50%;width:9px;height:9px;margin:-4px;border-radius:50%;background:#fff3d6;box-shadow:0 0 24px 10px rgba(201,169,106,.7),0 0 100px 50px rgba(201,169,106,.22);animation:dot 2.4s both}
+@keyframes dot{0%{transform:scale(0);opacity:0}40%{transform:scale(1.4);opacity:1}100%{transform:scale(.7);opacity:.8}}
+.l1{font:300 clamp(.78rem,3.2vw,1.1rem)/1.9 "Manrope";letter-spacing:.34em;max-width:22em;min-height:4em}
+.l1 span{display:inline-block;opacity:0;animation:lt 1.1s forwards}
+@keyframes lt{from{opacity:0;filter:blur(12px);transform:scale(1.9)}to{opacity:1;filter:none;transform:none}}
+.l2{font:italic 500 clamp(1.8rem,8vw,3.2rem)/1.2 "Cormorant Garamond";margin:26px 0 46px;color:#e6cf9d;opacity:0;animation:fi 2s 4.2s forwards}
+#intro .btn{opacity:0;animation:fi 1.6s 5.4s forwards}
+@keyframes fi{to{opacity:1}}
+#mus{position:fixed;z-index:70;top:calc(env(safe-area-inset-top,0px) + 14px);right:14px;width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:rgba(20,6,12,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#f3e6cf;font-size:1.1rem;cursor:pointer}
+#mus.on{background:linear-gradient(120deg,#c9a96a,#e9d6a8);color:#2b0a15}
+/* hero */
+.rays{position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent,rgba(255,236,200,.5),transparent 18%,rgba(255,220,220,.4) 32%,transparent 48%,rgba(255,236,200,.4) 66%,transparent 82%);filter:blur(40px);animation:spin 80s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.fl{position:absolute;touch-action:manipulation;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none;cursor:pointer}
+.fl svg{display:block;width:100%;height:100%;filter:drop-shadow(0 18px 24px rgba(74,15,31,.28));animation:spin 90s linear infinite}
+.fl.r svg{animation-direction:reverse;animation-duration:120s}
+h1{position:relative;z-index:3;font-weight:500;font-size:clamp(3.4rem,19vw,13rem);letter-spacing:.06em;line-height:1;background:linear-gradient(180deg,#e9d6a8,#b88f49 55%,#7a1f3a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 10px 30px rgba(255,255,255,.5));cursor:pointer;user-select:none;-webkit-user-select:none}
+h1 span{display:inline-block;transform:translateY(120%);opacity:0;transition:transform 1.6s cubic-bezier(.2,.8,.2,1),opacity 1.6s}
+.live h1 span{transform:none;opacity:1}
+h1.egg span{animation:egg 1.6s ease-in-out both}
+@keyframes egg{50%{transform:translateY(-30px) rotateY(360deg)}}
+.tag{position:relative;z-index:3;margin-top:22px;font:italic 400 clamp(1.15rem,4.4vw,1.7rem)/1.4 "Cormorant Garamond";max-width:20em;text-align:center;color:var(--ink);opacity:0;transition:opacity 2s 1.8s}
+.live .tag,.live .sc{opacity:1}
+.sc{position:absolute;z-index:3;bottom:calc(26px + env(safe-area-inset-bottom,0px));font:400 .7rem "Manrope";letter-spacing:.34em;color:var(--soft);text-decoration:none;opacity:0;transition:opacity 2s 3s;animation:bob 2.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(7px)}}
+/* cards */
+.cards{display:grid;gap:14px;width:min(640px,100%)}
+.card{text-align:left;cursor:pointer;color:inherit;font:inherit;padding:22px 26px;border:1px solid var(--line);transition:transform .4s,box-shadow .4s}
+.card:hover{transform:translateY(-2px)}
+.card .hd{display:flex;align-items:baseline;gap:18px}
+.card b{font:italic 500 2.4rem/1 "Cormorant Garamond";color:var(--gold)}
+.card em{font:400 .78rem "Manrope";letter-spacing:.26em;font-style:normal}
+.tx{display:block;max-height:0;overflow:hidden;transition:max-height 1s}
+.card.o .tx{max-height:220px}
+.tx p{font:italic 500 clamp(1.3rem,4.6vw,1.65rem)/1.3 "Cormorant Garamond";padding-top:16px;opacity:0}
+.card.o{box-shadow:0 0 50px -8px rgba(201,169,106,.6)}
+.card.o .tx p{animation:a1 1.4s .3s both}
+.card[data-a="2"].o .tx p{animation-name:a2}.card[data-a="3"].o .tx p{animation-name:a3}.card[data-a="4"].o .tx p{animation-name:a4}.card[data-a="5"].o .tx p{animation-name:a5}
+@keyframes a1{from{opacity:1;clip-path:inset(0 100% 0 0)}to{opacity:1;clip-path:inset(0)}}
+@keyframes a2{from{opacity:0;filter:blur(14px);transform:scale(1.25)}to{opacity:1}}
+@keyframes a3{from{opacity:0;transform:perspective(500px) rotateX(-80deg);transform-origin:top}to{opacity:1;transform:none}}
+@keyframes a4{from{opacity:0;letter-spacing:.4em}to{opacity:1}}
+@keyframes a5{0%{opacity:0;transform:translateY(24px)}60%{opacity:1;text-shadow:0 0 24px #e9d6a8}to{opacity:1;transform:none}}
+/* gifts */
+.gifts{display:flex;flex-wrap:wrap;gap:20px 34px;justify-content:center;margin-bottom:20px}
+.gift{width:170px;text-align:center;cursor:pointer;perspective:800px;position:relative;outline-offset:6px}
+.gift::before{content:"";position:absolute;left:50%;top:78px;width:150px;height:150px;margin:-75px;border-radius:50%;background:radial-gradient(#ffeab8,transparent 70%);opacity:0;transition:opacity 1s}
+.gift.open::before{opacity:.9}
+.sway{transform-style:preserve-3d;animation:sw 6s ease-in-out infinite alternate}
+@keyframes sw{from{transform:rotateY(-16deg)}to{transform:rotateY(16deg)}}
+.gift.open .sway{animation-play-state:paused}
+.cube{position:relative;width:110px;height:80px;margin:64px auto 0;transform-style:preserve-3d;transform:rotateX(-20deg) rotateY(calc(var(--ry,0)*1deg))}
+.cb{position:absolute;transform-style:preserve-3d}
+.cb i{position:absolute;box-shadow:inset 0 0 20px rgba(0,0,0,.18)}
+.sd{background-image:linear-gradient(90deg,transparent 41%,#e2c88a 41% 59%,transparent 59%)}
+.tp{background-image:linear-gradient(90deg,transparent 41%,#e2c88a 41% 59%,transparent 59%),linear-gradient(0deg,transparent 41%,#e2c88a 41% 59%,transparent 59%)}
+.cb i:nth-child(2){filter:brightness(.7)}.cb i:nth-child(3),.cb i:nth-child(4){filter:brightness(.84)}.cb i:nth-child(5){filter:brightness(1.1)}
+.lid{position:absolute;inset:0;transform-style:preserve-3d;transition:transform 1.3s cubic-bezier(.4,0,.2,1),opacity .8s 1s}
+.gift.open .lid{transform:translateY(-150px) rotateX(-40deg) rotateZ(24deg);opacity:0}
+.gift small{display:block;margin-top:46px;font:400 .72rem "Manrope";letter-spacing:.26em}
+#gm{min-height:120px;width:min(560px,100%);padding:30px 28px;text-align:center;font:italic 500 clamp(1.4rem,4.8vw,1.9rem)/1.35 "Cormorant Garamond";display:flex;align-items:center;justify-content:center;border-color:rgba(201,169,106,.4)}
+.pop span{animation:pop 1s cubic-bezier(.2,1.2,.3,1)}
+@keyframes pop{from{opacity:0;transform:translateY(20px) scale(.9);filter:blur(8px)}}
+#flash{position:fixed;inset:0;z-index:40;background:radial-gradient(#fff8e6,#e9d6a8);opacity:0;pointer-events:none}
+#flash.on{animation:fl 1.4s}
+@keyframes fl{10%{opacity:.95}to{opacity:0}}
+.shake{animation:shk .6s}
+@keyframes shk{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+/* mood */
+.moods{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:min(520px,100%);margin-bottom:28px}
+.moods button{font:400 .98rem "Manrope";color:var(--ink);padding:18px 12px;border-radius:20px;cursor:pointer;transition:transform .3s,background .4s}
+.moods button:active{transform:scale(.95)}
+.moods button.act{background:linear-gradient(120deg,#e6cf9d,#c9a96a);color:#2b0a15}
+#mm{min-height:170px;width:min(560px,100%);padding:30px 26px;display:flex;align-items:center;justify-content:center;text-align:center;font:italic 500 clamp(1.5rem,5vw,2.1rem)/1.3 "Cormorant Garamond"}
+/* letter */
+.cap{font:italic 500 clamp(1.4rem,5vw,2rem)/1.3 "Cormorant Garamond";text-align:center;max-width:14em;margin-bottom:30px;color:#e6cf9d}
+.env{position:relative;width:min(330px,80vw);aspect-ratio:3/2;perspective:900px;background:none;border:0;cursor:pointer;animation:bob 4s ease-in-out infinite}
+.env.open{animation:none}
+.env .bd{position:absolute;inset:0;border-radius:10px;background:linear-gradient(150deg,#f6e4d8,#dcb9ae);box-shadow:0 40px 60px -26px #000}
+.env .lf,.env .rt,.env .bt{position:absolute;inset:0;border-radius:10px}
+.env .lf{background:#e8cdc2;clip-path:polygon(0 0,52% 55%,0 100%)}.env .rt{background:#e8cdc2;clip-path:polygon(100% 0,48% 55%,100% 100%)}
+.env .bt{background:linear-gradient(#f9ebe0,#ebd0c5);clip-path:polygon(0 100%,50% 42%,100% 100%)}
+.env .fl2{position:absolute;left:0;top:0;width:100%;height:56%;background:linear-gradient(#e9d3c8,#d3aea3);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform 1.1s cubic-bezier(.5,0,.2,1),z-index 0s .55s;z-index:3}
+.env.open .fl2{transform:rotateX(180deg);z-index:0}
+.seal{position:absolute;left:50%;top:50%;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f0d99b,#b88f49 70%);color:#5a3a0e;display:flex;align-items:center;justify-content:center;font:italic 600 1.5rem "Cormorant Garamond";z-index:4;box-shadow:0 6px 16px rgba(0,0,0,.4),inset 0 0 0 3px rgba(255,255,255,.25);transition:opacity .5s,transform .6s}
+.env.open .seal{opacity:0;transform:scale(2.2) rotate(40deg)}
+.letter{width:min(580px,100%);max-height:0;opacity:0;overflow:hidden;padding:0 34px;background:linear-gradient(160deg,#fffaf3,#f6e8dc);color:#3b1420;border-radius:6px;box-shadow:0 40px 80px -30px #000;transition:max-height 1.6s,opacity 1s,padding .8s,margin .8s}
+.letter.show{max-height:1400px;opacity:1;padding:40px 34px;margin-top:30px}
+.letter p{font:500 clamp(1.15rem,4vw,1.35rem)/1.55 "Cormorant Garamond";margin-top:16px;min-height:1.5em}
+.letter p:first-child{margin-top:0}
+.cur::after{content:"|";color:#b88f49;animation:bl .8s infinite}
+@keyframes bl{50%{opacity:0}}
+/* finale */
+#fin::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 70%,#fffdf6,#fbe6c9 45%,rgba(251,214,214,.6));opacity:0;transition:opacity 3s}
+#fin.lit::before{opacity:1}
+#fin>*{position:relative}
+#bq{position:relative;width:300px;height:330px;margin-bottom:26px}
+.st{position:absolute;left:50%;bottom:0;width:3px;margin-left:-1.5px;background:linear-gradient(#8a9a78,#5f7358);transform-origin:50% 100%;transform:rotate(var(--a)) scaleY(0);transition:transform 1.6s cubic-bezier(.2,.8,.2,1);transition-delay:var(--dl)}
+.bloom .st{transform:rotate(var(--a)) scaleY(1)}
+.bl{position:absolute;left:50%;top:0;width:104px;height:104px;margin:-52px 0 0 -52px;transform:scale(0);transition:transform 1.5s cubic-bezier(.3,1.5,.5,1);transition-delay:calc(var(--dl) + 1.1s)}
+.bloom .bl{transform:scale(1)}
+.bl svg{width:100%;height:100%;display:block;filter:drop-shadow(0 8px 12px rgba(74,15,31,.3))}
+.bw{position:absolute;left:50%;bottom:-6px;width:84px;height:30px;margin-left:-42px;border-radius:8px;background:linear-gradient(#7a1f3a,#4a0f1f);box-shadow:inset 0 0 0 2px rgba(201,169,106,.7),0 8px 16px rgba(74,15,31,.4)}
+.fin{font:italic 500 clamp(2.8rem,11.5vw,6.6rem)/1.02 "Cormorant Garamond";text-align:center;max-width:9em;color:#4a0f1f;margin-bottom:22px}
+.fs{font:italic 400 clamp(1.15rem,4vw,1.5rem) "Cormorant Garamond";max-width:24em;text-align:center;color:#6b2b3a}
+.ps{margin:22px 0 36px;font-size:.84rem;color:#85505c;text-align:center}
+#fin .btn{color:#fff;background:linear-gradient(120deg,#7a1f3a,#4a0f1f)}
+#toast{position:fixed;z-index:65;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));width:min(420px,88vw);padding:18px 22px;text-align:center;font:italic 500 1.3rem/1.3 "Cormorant Garamond";color:#4a0f1f;background:rgba(255,250,243,.85);transform:translate(-50%,160%);transition:transform .9s cubic-bezier(.2,1.2,.3,1)}
+#toast.on{transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important;transition-duration:.01s!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body class="lock">
+<canvas id="fx"></canvas>
+<div id="flash"></div>
+<div id="toast" class="glass" role="status"></div>
+<button id="mus" aria-label="Музыка вкл/выкл">♪</button>
+
+<div id="intro">
+  <div class="dot"></div>
+  <div class="l1" id="l1" aria-label="Something special is waiting for you..."></div>
+  <div class="l2">Раушан, это для тебя.</div>
+  <button class="btn" id="open">OPEN YOUR SURPRISE →</button>
+</div>
+
+<main id="main">
+  <section id="hero">
+    <div class="rays"></div>
+    <h1 id="nm" aria-label="Raushan"></h1>
+    <p class="tag">Некоторым людям просто хочется подарить немного больше хорошего настроения.</p>
+    <a class="sc" href="#s2">SCROLL TO DISCOVER ↓</a>
+  </section>
+
+  <section id="s2">
+    <h2 class="rv">Небольшая коллекция приятностей для тебя.</h2>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section id="s3" class="dk">
+    <h2 class="rv">Комната подарков</h2>
+    <div class="gifts rv" id="gifts"></div>
+    <div id="gm" class="glass"><span>Выбери любой подарок ✨</span></div>
+  </section>
+
+  <section id="s4">
+    <h2 class="rv">Какое настроение подарить тебе сегодня?</h2>
+    <div class="moods rv" id="moods"></div>
+    <div id="mm" class="glass"><span>Нажми любую кнопку ✨</span></div>
+  </section>
+
+  <section id="s5" class="dk">
+    <p class="cap rv">Раушан. Открыть в подходящий момент.</p>
+    <button class="env rv" id="env" aria-expanded="false" aria-label="Открыть конверт"><span class="bd"></span><span class="lf"></span><span class="rt"></span><span class="bt"></span><span class="fl2"></span><span class="seal">R</span></button>
+    <div class="letter" id="letter"></div>
+  </section>
+
+  <section id="fin">
+    <div id="bq"><div class="bw"></div></div>
+    <h2 class="fin rv">РАУШАН, УЛЫБНИСЬ ❤️</h2>
+    <p class="fs rv">Возможно, это самый необычный способ пожелать тебе хорошего дня.</p>
+    <p class="ps rv">P.S. Никакого повода. Просто захотелось.</p>
+    <button class="btn rv" id="again">REPLAY THE MAGIC ↻</button>
+  </section>
+</main>
+
+<script>
+(function(){
+var $=function(s){return document.querySelector(s)};
+function R(a,b){return a+Math.random()*(b-a)}
+function C(v,a,b){return Math.max(a,Math.min(b,v))}
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+scrollTo(0,0);
+
+/* ---------- flower generator ---------- */
+var uid=0,PAL=[['#fde7e4','#d98c9a'],['#fff6ea','#e0a995'],['#f6cfd3','#a8344f'],['#fffaf3','#e4c29c']];
+function flower(p){var id='g'+(uid++),c=PAL[p],s='<svg viewBox="-100 -100 200 200"><defs><radialGradient id="'+id+'" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="'+c[1]+'"/><stop offset="1" stop-color="'+c[0]+'"/></radialGradient></defs>';
+[[11,92,36,0],[9,70,32,20],[7,48,26,10]].forEach(function(r){for(var i=0;i<r[0];i++){var a=360/r[0]*i+r[3],l=r[1],w=r[2];
+s+='<path transform="rotate('+a+')" d="M0 0C'+(-w)+' '+(-l*.3)+' '+(-w*.8)+' '+(-l)+' 0 '+(-l)+'C'+(w*.8)+' '+(-l)+' '+w+' '+(-l*.3)+' 0 0Z" fill="url(#'+id+')" stroke="rgba(255,255,255,.55)" stroke-width="1" opacity=".93"/>'}});
+return s+'<circle r="13" fill="#c9a96a"/><circle r="7" fill="#f0d99b"/><circle cx="-3" cy="-3" r="2.5" fill="#fff8e0"/></svg>'}
+
+/* ---------- canvas fx ---------- */
+var cv=$('#fx'),cx=cv.getContext('2d'),W,H,dpr=Math.min(devicePixelRatio||1,2);
+function size(){W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;cx.setTransform(dpr,0,0,dpr,0,0)}
+size();addEventListener('resize',size);
+var cols=['#f6c1c8','#fbd9d9','#e49aa8','#fff1e0','#e3c789'],pt=[],gl=[],bu=[];
+for(var i=0;i<(reduce?8:20);i++)pt.push({x:R(0,W),y:R(-H,H),s:R(7,14),r:R(0,6),vr:R(-.02,.02),vy:R(.4,1),ph:R(0,6),c:cols[i%5],a:R(.35,.65)});
+for(var j=0;j<(reduce?8:30);j++)gl.push({x:R(0,W),y:R(0,H),r:R(1,2.6),ph:R(0,6),sp:R(.01,.03)});
+function petal(p,a){cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.globalAlpha=a;cx.fillStyle=p.c;var s=p.s;cx.beginPath();cx.moveTo(0,-s);cx.bezierCurveTo(s*.9,-s*.5,s*.7,s*.7,0,s);cx.bezierCurveTo(-s*.7,s*.7,-s*.9,-s*.5,0,-s);cx.fill();cx.restore()}
+function burst(x,y,n,gold){n=reduce?Math.min(n,8):n;for(var i=0;i<n;i++){var an=R(0,6.28),v=R(2,gold?11:7);bu.push({x:x,y:y,vx:Math.cos(an)*v,vy:Math.sin(an)*v-3,s:R(5,11),r:R(0,6),vr:R(-.15,.15),c:gold?(i%2?'#e9d6a8':'#c9a96a'):cols[i%5],l:1})}}
+var layers,tx=0,ty=0,cu={x:0,y:0},gifts;
+function frame(){requestAnimationFrame(frame);if(document.hidden)return;
+cx.clearRect(0,0,W,H);
+gl.forEach(function(g){g.ph+=g.sp;var a=.25+.5*Math.abs(Math.sin(g.ph));cx.globalAlpha=a*.3;cx.fillStyle='#fff';cx.beginPath();cx.arc(g.x,g.y,g.r*3,0,6.3);cx.fill();cx.globalAlpha=a;cx.fillStyle='#fff3d0';cx.beginPath();cx.arc(g.x,g.y,g.r,0,6.3);cx.fill()});
+pt.forEach(function(p){p.ph+=.02;p.x+=Math.sin(p.ph)*.7+.2;p.y+=p.vy;p.r+=p.vr;if(p.y>H+20){p.y=-20;p.x=R(0,W)}if(p.x>W+20)p.x=-20;petal(p,p.a)});
+for(var i=bu.length-1;i>=0;i--){var b=bu[i];b.x+=b.vx;b.y+=b.vy;b.vy+=.17;b.vx*=.985;b.r+=b.vr;b.l-=.012;if(b.l<=0){bu.splice(i,1);continue}petal(b,b.l)}
+cx.globalAlpha=1;
+cu.x+=(tx-cu.x)*.06;cu.y+=(ty-cu.y)*.06;var sy=scrollY;
+if(layers&&sy<H*1.3)layers.forEach(function(l){var d=+l.dataset.d;l.style.transform='translate3d('+(cu.x*d*30)+'px,'+(cu.y*d*30-sy*d*.22)+'px,0)'});
+if(gifts)gifts.style.setProperty('--ry',cu.x*26)}
+requestAnimationFrame(frame);
+addEventListener('pointermove',function(e){if(e.pointerType==='mouse'){tx=(e.clientX/W-.5)*2;ty=(e.clientY/H-.5)*2}});
+addEventListener('deviceorientation',function(e){if(e.gamma==null)return;tx=C(e.gamma/25,-1,1);ty=C(((e.beta||45)-45)/25,-1,1)});
+
+/* ---------- toast ---------- */
+var tt,toastEl=$('#toast');
+function toast(m){toastEl.textContent=m;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('on')},4800)}
+
+/* ---------- intro ---------- */
+var l1=$('#l1'),txt='SOMETHING SPECIAL IS WAITING FOR YOU...';
+txt.split(' ').forEach(function(w,wi,arr){var wd=document.createElement('span');wd.style.cssText='display:inline-block;white-space:nowrap';
+w.split('').forEach(function(ch,i){var s=document.createElement('span');s.textContent=ch;s.style.animationDelay=(1.4+(txt.indexOf(w)+i)*.05)+'s';wd.appendChild(s)});
+l1.appendChild(wd);if(wi<arr.length-1)l1.appendChild(document.createTextNode(' '))});
+var nm=$('#nm');'RAUSHAN'.split('').forEach(function(ch,i){var s=document.createElement('span');s.textContent=ch;s.style.transitionDelay=(.7+i*.12)+'s';nm.appendChild(s)});
+
+/* hero flowers */
+var hero=$('#hero');
+[[-6,6,40,.5,0,0],[72,2,34,.8,1,1],[62,56,48,.35,2,0],[-10,58,38,.9,3,1],[40,70,18,1.2,1,0],[30,-2,16,1.1,3,1]].forEach(function(f){
+var d=document.createElement('div');d.className='fl'+(f[5]?' r':'');d.dataset.d=f[3];d.style.cssText='left:'+f[0]+'%;top:'+f[1]+'%;width:'+f[2]+'vmin;height:'+f[2]+'vmin';d.innerHTML=flower(f[4]);hero.appendChild(d)});
+layers=[].slice.call(document.querySelectorAll('.fl'));
+/* easter: long press on flower */
+var wishes=['Пусть сегодня случится что-то маленькое и очень приятное 🌷','Пусть все твои «когда-нибудь» превращаются в «уже».','Желаю лёгких дней и красивых неожиданностей.','Пусть цветы в твоей жизни будут не только на фото 🌸','Ты заслуживаешь того, чтобы радоваться без причины.'];
+layers.forEach(function(f){var t;f.addEventListener('pointerdown',function(e){var x=e.clientX,y=e.clientY;t=setTimeout(function(){toast(wishes[Math.floor(Math.random()*wishes.length)]);burst(x,y,26)},650)});
+['pointerup','pointerleave','pointercancel'].forEach(function(n){f.addEventListener(n,function(){clearTimeout(t)})});f.addEventListener('contextmenu',function(e){e.preventDefault()})});
+/* easter: name taps */
+var taps=0,tp;nm.addEventListener('click',function(e){taps++;clearTimeout(tp);tp=setTimeout(function(){taps=0},1800);
+if(taps>=5){taps=0;nm.classList.remove('egg');void nm.offsetWidth;nm.classList.add('egg');burst(W/2,H/2,70,true);toast('Секретная анимация найдена ✨ Ты внимательная.')}});
+/* easter: random message */
+var started=false;
+
+$('#open').addEventListener('click',function(e){
+var r=e.currentTarget.getBoundingClientRect(),it=$('#intro');it.style.setProperty('--x',(r.left+r.width/2)+'px');it.style.setProperty('--y',(r.top+r.height/2)+'px');
+try{if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission)DeviceOrientationEvent.requestPermission().catch(function(){})}catch(x){}
+it.classList.add('go');document.body.classList.remove('lock');burst(r.left+r.width/2,r.top+r.height/2,50,true);
+setTimeout(function(){hero.classList.add('live')},900);
+setTimeout(function(){it.style.display='none'},1900);
+if(!started){started=true;setTimeout(function(){toast('Ты ещё здесь? Тогда держи ещё одну улыбку :)');burst(W/2,H*.8,30)},R(45000,85000))}});
+
+/* ---------- reveal ---------- */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+
+/* ---------- compliments ---------- */
+var cd=[['YOUR SMILE','Некоторые улыбки способны сделать даже самый обычный день приятнее.'],['YOUR ENERGY','В тебе есть что-то такое, что невозможно описать одним словом.'],['YOUR UNIQUENESS','Не пытайся быть похожей на кого-то. Быть собой — уже прекрасно.'],['YOUR FUTURE','Пусть впереди тебя ждёт гораздо больше хорошего, чем ты сама ожидаешь.'],['YOUR HAPPINESS','Пусть поводов для счастья будет столько, что ты перестанешь их считать.']];
+cd.forEach(function(c,i){var b=document.createElement('button');b.className='card glass rv';b.dataset.a=i+1;b.setAttribute('aria-expanded','false');
+b.innerHTML='<span class="hd"><b>0'+(i+1)+'</b><em>'+c[0]+'</em></span><span class="tx"><p>'+c[1]+'</p></span>';
+b.addEventListener('click',function(e){var o=b.classList.toggle('o');b.setAttribute('aria-expanded',o);if(o)burst(e.clientX,e.clientY,18)});$('#cards').appendChild(b);io.observe(b)});
+
+/* ---------- gifts (3D) ---------- */
+function cub(w,h,d,c,x,y){var f=[['translateZ('+d/2+'px)',w,h],['rotateY(180deg) translateZ('+d/2+'px)',w,h],['rotateY(90deg) translateZ('+w/2+'px)',d,h],['rotateY(-90deg) translateZ('+w/2+'px)',d,h],['rotateX(90deg) translateZ('+h/2+'px)',w,d],['rotateX(-90deg) translateZ('+h/2+'px)',w,d]];
+return '<div class="cb" style="width:'+w+'px;height:'+h+'px;left:'+x+'px;top:'+y+'px">'+f.map(function(q,i){return '<i class="'+(i>3?'tp':'sd')+'" style="width:'+q[1]+'px;height:'+q[2]+'px;left:'+(w-q[1])/2+'px;top:'+(h-q[2])/2+'px;transform:'+q[0]+';background-color:'+c+'"></i>'}).join('')+'</div>'}
+gifts=$('#gifts');var gm=$('#gm'),G=[['THE LITTLE SMILE','#f1bcc4','Официально сообщаем: сегодня у тебя есть разрешение улыбаться без причины.'],['A LITTLE WISH','#f7ecdc','Желаю тебе таких дней, после которых хочется сказать: «вот это было прекрасно!»'],['THE SECRET','#7a1f3a','Секрет: ты умеешь превращать обычный день в хороший — просто тем, что ты есть. Проверь, получилось ли это сегодня 🙂']];
+function say(el,m){el.classList.remove('pop');void el.offsetWidth;el.firstChild.textContent=m;el.classList.add('pop')}
+G.forEach(function(g,i){var d=document.createElement('div');d.className='gift';d.tabIndex=0;d.setAttribute('role','button');d.setAttribute('aria-label',g[0]);
+d.innerHTML='<div class="sway"><div class="cube">'+cub(110,80,110,g[1],0,0)+'<div class="lid">'+cub(122,26,122,g[1],-6,-24)+'</div></div></div><small>'+g[0]+'</small>';
+function op(e){var r=d.getBoundingClientRect();if(!d.classList.contains('open')){d.classList.add('open')}say(gm,g[2]);
+if(i==2){var fl=$('#flash');fl.classList.remove('on');void fl.offsetWidth;fl.classList.add('on');document.body.classList.remove('shake');void document.body.offsetWidth;document.body.classList.add('shake');burst(r.left+r.width/2,r.top+70,110,true)}else burst(r.left+r.width/2,r.top+70,34)}
+d.addEventListener('click',op);d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();op()}});gifts.appendChild(d)});
+
+/* ---------- mood ---------- */
+var MO=[['🌸 Хочу нежности','Пусть сегодня всё будет мягко: тёплый свет, тихая музыка и хорошие новости.|Ты заслуживаешь, чтобы с тобой обращались бережно. Начни с себя.|Выдохни. Всё важное обязательно получится, не торопись.|Пусть этот вечер пахнет чем-то уютным — чаем, весной или свежей выпечкой.|Сегодня можно ничего никому не доказывать. Просто быть.|Пусть рядом будут люди, с которыми не нужно притворяться.|Хорошие люди возвращают в мир тепло. Ты — из таких.|Маленькая радость на сегодня: любимая песня и пять минут тишины.|Пусть тревоги отступят, а лёгкость задержится подольше.|Ты справляешься лучше, чем думаешь. Обними себя мысленно.'],
+['✨ Хочу комплимент','У тебя особенный взгляд на мир — сразу чувствуется, что ты умеешь замечать красивое.|Рядом с тобой людям легче дышится. Редкий талант.|Твоя искренность — лучшее, что можно носить с собой.|В тебе есть стиль, который невозможно купить.|Ты умеешь быть собой — и это выглядит потрясающе.|Улыбка у тебя из тех, что запоминаются надолго.|У тебя красивая энергетика: спокойная, тёплая, настоящая.|Ты из тех людей, о ком вспоминают с улыбкой.|Ум, чувство юмора и доброе сердце — отличное сочетание.|Скромность тебе к лицу, но вообще-то ты потрясающая.'],
+['😂 Хочу посмеяться','Официально: если смотреть на экран и улыбаться, калории не считаются.|Твой внутренний голос только что сказал «а давай ещё кнопку». Послушайся.|Научный факт: от улыбки работают десятки мышц. Считай, это тренировка.|Сообщение сломалось от переизбытка комплиментов. Перезагружаем... готово!|Если бы настроение продавали, ты бы открыла сеть магазинов.|Внимание: обнаружен критический уровень обаяния. Лечить не рекомендуем.|Диагноз: хроническая симпатичность. Лечение: ещё одна кнопка.|Прогноз погоды: местами облачно, но с твоей улыбкой — ясно.|Кофе — это хорошо, но ты бодришь лучше. Без кофеина.|Секрет успеха: делать вид, что так и было задумано.'],
+['☀️ Хочу мотивацию','Один маленький шаг сегодня лучше, чем идеальный план когда-нибудь.|Ты уже прошла через то, что казалось невозможным. Продолжай.|Не сравнивай свою первую главу с чужой двадцатой.|Верь в себя: у тебя больше сил, чем кажется.|Сделай сегодня одно дело, которым будешь гордиться вечером.|Мечты не случаются сами — но у тебя хорошо получается их приближать.|Ошибки — не провал, а черновики. Хорошее всегда пишется с правками.|Двигайся в своём темпе. Главное — не останавливаться.|Твоё время идёт именно в нужном для тебя ритме.|Выбери смелость. Она всегда красивее сомнений.']];
+var mm=$('#mm'),lastM='';
+MO.forEach(function(m){var a=m[1].split('|'),b=document.createElement('button');b.className='glass';b.textContent=m[0];
+b.addEventListener('click',function(e){document.querySelectorAll('.moods button').forEach(function(x){x.classList.remove('act')});b.classList.add('act');
+var t;do{t=a[Math.floor(Math.random()*a.length)]}while(t===lastM);lastM=t;say(mm,t);var r=mm.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,24)});$('#moods').appendChild(b)});
+
+/* ---------- letter (typewriter) ---------- */
+var LT=['Знаешь, иногда не нужен какой-то особенный повод, чтобы сделать человеку приятно.','Просто захотелось подарить тебе несколько минут хорошего настроения.','Пусть у тебя всё складывается так, как ты мечтаешь. Пусть рядом будут искренние люди, впереди — красивые возможности, а в душе всегда остаётся место для маленьких радостей.','И никогда не забывай, насколько ты замечательная.','С улыбкой для тебя. ♡'];
+var env=$('#env'),lt=$('#letter'),fast=false,typing=false;
+function type(){typing=true;var pi=0,ci=0,p=document.createElement('p');p.className='cur';lt.appendChild(p);
+var iv=setInterval(function(){var n=fast?8:1;while(n--){if(ci<LT[pi].length){p.textContent+=LT[pi][ci++]}else{p.classList.remove('cur');pi++;if(pi>=LT.length){clearInterval(iv);return}p=document.createElement('p');p.className='cur';lt.appendChild(p);ci=0;break}}},fast?16:34)}
+lt.addEventListener('click',function(){fast=true});
+env.addEventListener('click',function(e){if(env.classList.contains('open'))return;env.classList.add('open');env.setAttribute('aria-expanded','true');burst(e.clientX,e.clientY,40,true);
+setTimeout(function(){lt.classList.add('show');setTimeout(function(){lt.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(type,900)},500)},900)});
+
+/* ---------- finale ---------- */
+var bq=$('#bq');[-40,-24,-8,8,24,40,0].forEach(function(a,i){var s=document.createElement('div');s.className='st';s.style.cssText='--a:'+a+'deg;--dl:'+(i*.14)+'s;height:'+(i==6?250:205-Math.abs(a)*.6)+'px';s.innerHTML='<div class="bl">'+flower(i%4)+'</div>';bq.insertBefore(s,bq.firstChild)});
+var fin=$('#fin');new IntersectionObserver(function(es,ob){if(es[0].isIntersecting){fin.classList.add('lit','bloom');ob.disconnect();
+[0,900,1800,2700].forEach(function(d,k){setTimeout(function(){burst(W*(.25+k*.17),H*.72,40)},d)})}},{threshold:.45}).observe(fin);
+$('#again').addEventListener('click',function(){document.body.style.transition='opacity 1s';document.body.style.opacity=0;scrollTo({top:0,behavior:'auto'});setTimeout(function(){location.reload()},900)});
+
+/* ---------- music (WebAudio, only on request) ---------- */
+var ac,mg,t1,t2,on=false,ci=0,mb=$('#mus');
+var ch=[[130.8,196,261.6,329.6],[110,164.8,220,261.6],[87.3,130.8,174.6,261.6],[98,146.8,196,246.9]],pent=[523.3,587.3,659.3,784,880,1046.5];
+function tone(f,t,ty,pk,at,du){var o=ac.createOscillator(),g=ac.createGain();o.type=ty;o.frequency.value=f;o.detune.value=R(-6,6);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(pk,t+at);g.gain.exponentialRampToValueAtTime(.0001,t+du);o.connect(g);g.connect(mg);o.start(t);o.stop(t+du+.1)}
+function pad(){var t=ac.currentTime;ch[ci++%4].forEach(function(f){tone(f,t,'sine',.07,2.2,7.5)})}
+function bell(){if(Math.random()<.7)tone(pent[Math.floor(Math.random()*pent.length)],ac.currentTime,'triangle',.05,.02,2.6)}
+mb.addEventListener('click',function(){try{if(!ac){var A=window.AudioContext||window.webkitAudioContext;ac=new A();mg=ac.createGain();mg.gain.value=0;var f=ac.createBiquadFilter();f.type='lowpass';f.frequency.value=2200;mg.connect(f);f.connect(ac.destination)}
+on=!on;mb.classList.toggle('on',on);mb.textContent=on?'♫':'♪';
+if(on){ac.resume();mg.gain.cancelScheduledValues(ac.currentTime);mg.gain.linearRampToValueAtTime(.9,ac.currentTime+2);pad();t1=setInterval(pad,5200);t2=setInterval(bell,1900)}
+else{clearInterval(t1);clearInterval(t2);mg.gain.linearRampToValueAtTime(0,ac.currentTime+1.2)}}catch(e){}});
+})();
+</script>
+</body>
+</html>
